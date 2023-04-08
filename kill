@@ -1,0 +1,18 @@
+-- 피 닳는 스크립트
+local Debounce = false
+
+script.Parent.Touched:connect(function(hit)
+
+	if hit.Parent:FindFirstChild("Humanoid")and Debounce == false then
+
+		Debounce = true
+
+		hit.Parent.Humanoid:TakeDamage(이 글자는 지워 주시고 피 닳는 수만큼 (1~99까지 써주세요.))
+
+		wait()
+
+		Debounce = false
+
+	end
+
+end)
