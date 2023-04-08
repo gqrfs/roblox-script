@@ -1,0 +1,23 @@
+-- 말하는 스크립트 (여러 번 말하기)
+
+local ChatService = game:GetService("Chat")
+local npc = script.Parent
+
+local head = npc.Head
+local click = npc.ClickDetector
+ 
+local dialogue = {"안녕하세요? 반갑습니다.^^", "아아 테스트", "블로그 i123u", "https://i123u.tistory.com"} 
+local index = 1
+
+local function speak()
+    local talk = dialogue[index] 
+    ChatService:Chat(head, talk)
+    
+    if index == #dialogue then
+        index = 1 
+    else
+        index = index + 1
+    end
+end
+ 
+click.MouseClick:Connect(speak)
