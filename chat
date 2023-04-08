@@ -1,0 +1,16 @@
+-- 말하는 스크립트 (한 대사)
+
+local ChatService = game:GetService("Chat")
+local npc = script.Parent
+
+local head = npc.Head
+local click = npc.ClickDetector
+ 
+local dialogue= {}
+ 
+local function speak()
+    local dialogue = "안녕하세요? 반갑습니다. ^^" --여기에 대사를 씁니다.
+    ChatService:Chat(head, dialogue)
+end
+ 
+click.MouseClick:Connect(speak)
