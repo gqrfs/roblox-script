@@ -1,0 +1,73 @@
+안녕하세요
+여기는 i123u의 로블록스입니다.
+지금부터는 안나온 스크립트를 소개하겠습니다.
+
+1. 파트의 닿으면 올라가는 스크립트
+local speed = 50 --올라가는 스피드 입니다.
+
+script.Parent.Touched:Connect(function(hit)
+ local rootpart = hit.Parent:FindFirstChild("HumanoidRootPart") or hit
+ 
+ if not rootpart:FindFirstChild("Elevator") and hit.Parent:FindFirstChild("Humanoid") then
+  local velocity = Instance.new("BodyVelocity", rootpart)
+  velocity.Name = "Elevator"
+  local posi = script.Parent.CFrame.UpVector
+  local vector = Vector3.new(0,math.huge,0)
+  
+  if posi.X ~= 0 then
+   vector = Vector3.new(math.huge, vector.Y, vector.Z)
+  end
+  
+  if posi.Z ~= 0 then
+   vector = Vector3.new(vector.X, vector.Y, math.huge) 
+  end
+  
+  velocity.MaxForce = vector
+  velocity.Velocity = script.Parent.CFrame.UpVector * speed
+ end
+end)
+
+script.Parent.TouchEnded:Connect(function(hit)
+ local rootpart = hit.Parent:FindFirstChild("HumanoidRootPart") or hit
+ 
+ if rootpart:FindFirstChild("Elevator") and hit.Parent:FindFirstChild("Humanoid") then
+  for i, v in pairs(rootpart:GetChildren()) do
+   if v.ClassName == "BodyVelocity" then
+    v:Destroy()
+   end
+  end
+ end
+
+
+2. 강퇴(?)
+local value = false --value는 false
+
+script.Parent.Touched:Connect(function(hit)
+
+ local humanoid = hit.Parent:FindFirstChild("Humanoid")
+
+ if humanoid and value == false then 
+  local plr = game.Players:GetPlayerFromCharacter(hit.Parent)
+  plr:Kick("누르지 말라고 했습니다.")
+  value = true
+ end
+end)
+
+3. 서버 
+local System = "[System] "
+
+local Message = "안녕하세요"
+
+local Waiter = 5
+
+local TextSizes = 18
+
+
+while wait(Waiter) do
+ game.StarterGui:SetCore("ChatMakeSystemMessage", 
+  {
+   Text = System .. Message,
+   Color = Color3.fromRGB(0, 0, 255),
+   TextSize = TextSizes,
+  })
+end
