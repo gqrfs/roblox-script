@@ -71,3 +71,78 @@ while wait(Waiter) do
    TextSize = TextSizes,
   })
 end
+
+날아다니기
+
+local UserInputService = game:GetService("UserInputService")
+local player = game.Players.LocalPlayer
+local character = player.Character
+local humanoid = character:WaitForChild("Humanoid")
+local flySpeed = 50
+local isFlying = false
+UserInputService.InputBegan:Connect(function(input, isProcessed)
+    if input.KeyCode == Enum.KeyCode.Space and not isProcessed then
+        isFlying = true
+        humanoid.PlatformStand = true
+    end
+end)
+UserInputService.InputEnded:Connect(function(input, isProcessed)
+    if input.KeyCode == Enum.KeyCode.Space and not isProcessed then
+        isFlying = false
+        humanoid.PlatformStand = false
+    end
+end)
+game:GetService("RunService").RenderStepped:Connect(function()
+    if isFlying then
+        local moveDirection = Vector3.new(0, 1, 0)
+        local moveVector = moveDirection * flySpeed * game:GetService("DeltaTime")
+        
+        humanoid:Move(moveVector)
+    end
+end)
+
+
+
+타워 잘 만드는 법
+
+로블록스에서 타워를 잘 만들기 위해서는 몇 가지 요소를 고려해야 합니다. 아래는 타워를 잘 만드는데 도움이 되는 일반적인 지침입니다:
+
+계획 수립: 타워를 만들기 전에 디자인과 기능에 대한 명확한 계획을 세워야 합니다. 타워의 높이, 구조, 테마, 사용할 부품 등을 고려하세요.
+
+기반 구성: 타워의 안정성을 위해 튼튼한 기반을 구성해야 합니다. 콘크리트 또는 강화된 벽돌로 이루어진 기반을 만들어 타워를 지지하세요.
+
+다양한 요소 추가: 타워를 흥미롭고 시각적으로 매력적으로 만들기 위해 다양한 요소를 추가하세요. 이는 벽돌, 장식, 스케일 모델, 색상, 조명 등을 포함할 수 있습니다.
+
+기능 추가: 타워에 기능을 추가하여 상호작용이 가능하도록 만들 수 있습니다. 이는 엘리베이터, 슬라이드, 회전 기능, 게임 요소 등을 포함할 수 있습니다.
+
+상세한 디테일: 타워의 디테일을 신경쓰세요. 작은 부분들이 전체적인 완성도를 높여줄 수 있습니다. 벽돌의 패턴, 창문, 문, 장식적인 요소 등을 추가하여 타워를 더욱 풍부하게 만들어보세요.
+
+플레이어 경험 고려: 타워를 만들 때 플레이어의 경험을 고려하세요. 타워 내부에 탐험 가능한 공간, 전망대, 비밀 공간 등을 추가하여 플레이어가 즐겁고 흥미로운 경험을 할 수 있도록 만들어보세요.
+
+테스트와 수정: 타워를 만든 후에는 다른 플레이어들로부터 피드백을 받고 테스트해보세요. 필요한 경우 수정하여 완성도를 높일 수 있습니다.
+
+이러한 지침을 따르면 로블록스에서 잘 만들어진 타워를 구성할 수 있습니다. 타워를 만드는 과정에서 상상력을 발휘하고 창의성을 발휘해보세요. 로블록스 스튜디오에서 다양한 도구와 부품을 활용하여 멋진 타워를 만들어보세요 지금 당장 타워를 만들 수 있습니다.
+
+
+밟지마... (게임 일시 중지)
+
+local part = workspace.Part -- 원하는 파트 선택 (Part는 파트 이름에 해당하는 부분입니다)
+local pauseDuration = 5 -- 일시 정지 상태를 유지할 시간 (예: 5초)
+
+local function PauseGame()
+    game:GetService("StarterGui"):SetCore("Paused", true) -- 게임 일시 정지
+    -- 추가적인 작업 수행
+    wait(pauseDuration)
+    game:GetService("StarterGui"):SetCore("Paused", false) -- 게임 재개
+end
+
+part.Touched:Connect(function(hit)
+    local player = game.Players:GetPlayerFromCharacter(hit.Parent)
+    if player then
+        PauseGame() -- 게임 일시 정지
+    end
+end)
+
+pc: https://i123u.tistory.com
+
+모바일:https://i123u.tistory.com/m/
